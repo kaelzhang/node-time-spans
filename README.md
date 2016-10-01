@@ -51,9 +51,21 @@ m15.offset(3)
 
 ## Common Interface
 
-- `.next()` returns `Date`, the next time span
-- `.prev()` returns `Date`, the previous time span
-- `.offset(delta)` returns `Date`, the `delta`-time time span relative
+`new (<Constructor>)(time)`
+
+- **time** `String|Date|Number.<timestamp>` the initial value of the time.
+
+### next()
+
+returns `Date`, the next time span
+
+### prev()`
+
+returns `Date`, the previous time span
+
+### offset(delta)
+
+returns `Date`, the `delta`-time time span relative
 
 ## License
 
