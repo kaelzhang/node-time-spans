@@ -1,0 +1,27 @@
+{
+  "name": "time-spans",
+  "version": "1.0.0",
+  "description": "time-spans",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava --verbose --timeout=10s"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/kaelzhang/node-time-spans.git"
+  },
+  "keywords": [
+    "time-spans"
+  ],
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "author": "kaelzhang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kaelzhang/node-time-spans/issues"
+  },
+  "devDependencies": {
+    "ava": "^0.16.0"
+  }
+}
