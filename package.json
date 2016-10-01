@@ -1,7 +1,7 @@
 {
   "name": "time-spans",
   "version": "1.0.0",
-  "description": "time-spans",
+  "description": "Time spans, especially for financial technology.",
   "main": "index.js",
   "scripts": {
     "test": "ava --verbose --timeout=10s"
@@ -11,7 +11,12 @@
     "url": "git://github.com/kaelzhang/node-time-spans.git"
   },
   "keywords": [
-    "time-spans"
+    "time-spans",
+    "time-span",
+    "span",
+    "fintech",
+    "finance",
+    "timing"
   ],
   "engines": {
     "node": ">=0.10.0"

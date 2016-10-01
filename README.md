@@ -25,8 +25,35 @@ $ npm install time-spans --save
 ## Usage
 
 ```js
-const time_spans = require('time-spans')
+const {
+  Second,
+  Minute,
+  Minute15,
+  Minute30,
+  Minute60,
+  Day,
+  Week,
+  Month
+} = require('time-spans')
+
+// Gets the nearest 15-minute breakpoint
+const m15 = new Minute15()
+
+// 15 minutes after
+m15.next()
+
+// 15 minute before
+m15.prev()
+
+// 15 * 3 minutes after
+m15.offset(3)
 ```
+
+## Common Interface
+
+- `.next()` returns `Date`, the next time span
+- `.prev()` returns `Date`, the previous time span
+- `.offset(delta)` returns `Date`, the `delta`-time time span relative
 
 ## License
 

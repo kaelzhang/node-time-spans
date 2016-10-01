@@ -5,18 +5,21 @@ const MINUTE30 = MINUTE * 30
 const MINUTE60 = MINUTE * 60
 const DAY = MINUTE * 60 * 24
 const WEEK = DAY * 7
+const MONTH = Symbol('month')
+
 
 class TimeSpan {
   constructor (time, type) {
-    super()
-
     this._type = type
-    this._date = new Date(time)
+    this._date = time
+      ? new Date(time)
+      : new Date()
+
     this._closest(this._date)
   }
 
   // Returns the beginning time of the current time span
-  time () : Date {
+  time () {
     return new Date(this._date)
   }
 
@@ -63,7 +66,19 @@ function noHours (date) {
 }
 
 function noDate (date) {
-  date.setDate(0)
+  date.setDate(1)
+}
+
+
+class Second extends TimeSpan {
+  constructor (time) {
+    super(time, SECOND)
+  }
+
+  _closest (date) {
+    noMilliseconds(date)
+    return date
+  }
 }
 
 
@@ -158,7 +173,6 @@ const MONTHS_A_YEAR = 12
 class Month extends TimeSpan {
   constructor (time) {
     super(time, MONTH)
-    // code ...
   }
 
   _closest (date) {
@@ -169,39 +183,14 @@ class Month extends TimeSpan {
     noMilliseconds(date)
   }
 
-  // ## case
-  // get_month delta newMonth left set_month set_year
-  // 0         -1    -1       -1   11        -1
-  // 0         -13   -13      -1   11        -2
-  // 0         1     1        1    1         0
-  // 0         13    13       1    1         1
-
   _addSpan (amount) {
-    const date = new Date(this._date)
-    const newMonth = date.getMonth() + amount
-
-    const left = newMonth % MONTHS_A_YEAR
-
-    date.setMonth(
-      left < 0
-        ? MONTHS_A_YEAR + left
-        : left
-    )
-
-    const yearDelta = (newMonth - left) / MONTHS_A_YEAR + (
-      newMonth < 0
-        // borrow
-        ? -1
-        : 0
-    )
-
-    date.setFullYear(date.getFullYear() + yearDelta)
-    return date
+    return new Date(this._date.getFullYear(), this._date.getMonth() + amount)
   }
 }
 
 
 module.exports = {
+  Second,
   Minute,
   Minute15,
   Minute30,
