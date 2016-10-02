@@ -28,6 +28,7 @@ $ npm install time-spans --save
 const {
   Second,
   Minute,
+  Minute5,
   Minute15,
   Minute30,
   Minute60,
@@ -37,7 +38,10 @@ const {
 } = require('time-spans')
 
 // Gets the nearest 15-minute breakpoint
-const m15 = new Minute15()
+const m15 = new Minute15(new Date(2016, 9, 1, 7, 50))
+
+// deepEqual to `new Date(2016, 9, 1, 7, 45)`
+m15.time()
 
 // 15 minutes after
 m15.next()
@@ -52,6 +56,10 @@ m15.offset(3)
 ## new {Constructor}(time)
 
 - **time** `String|Date|Number.<timestamp>` the initial value of the time.
+
+### time()
+
+returns `Date`, the real date.
 
 ### next()
 
