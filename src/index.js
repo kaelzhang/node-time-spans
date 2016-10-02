@@ -1,8 +1,5 @@
 const SECOND = 1000
 const MINUTE = SECOND * 60
-const MINUTE15 = MINUTE * 15
-const MINUTE30 = MINUTE * 30
-const MINUTE60 = MINUTE * 60
 const DAY = MINUTE * 60 * 24
 const WEEK = DAY * 7
 const MONTH = Symbol('month')
@@ -53,7 +50,7 @@ function noMilliseconds (date) {
 
 function modMinutes (date, mod) {
   const m = date.getMinutes()
-  const left = m / mod
+  const left = m % mod
   date.setMinutes(m - left)
 }
 
@@ -77,62 +74,21 @@ class Second extends TimeSpan {
 
   _closest (date) {
     noMilliseconds(date)
-    return date
   }
 }
 
 
-class Minute extends TimeSpan {
-  constructor (time) {
-    super(time, MINUTE)
-  }
+function minuteFactory (minuteSpan) {
+  return class Minute extends TimeSpan {
+    constructor (time) {
+      super(time, MINUTE * minuteSpan)
+    }
 
-  _closest (date) {
-    noSeconds(date)
-    noMilliseconds(date)
-    return date
-  }
-}
-
-
-class Minute15 extends TimeSpan {
-  constructor (time) {
-    super(time, MINUTE15)
-  }
-
-  _closest (date) {
-    modMinutes(date, 15)
-    noSeconds(date)
-    noMilliseconds(date)
-    return date
-  }
-}
-
-
-class Minute30 extends TimeSpan {
-  constructor (time) {
-    super(time, MINUTE30)
-  }
-
-  _closest (date) {
-    modMinutes(date, 30)
-    noSeconds(date)
-    noMilliseconds(date)
-    return date
-  }
-}
-
-
-class Minute60 extends TimeSpan {
-  constructor (time) {
-    super(time, MINUTE60)
-  }
-
-  _closest (date) {
-    noMinutes(date)
-    noSeconds(date)
-    noMilliseconds(date)
-    return date
+    _closest (date) {
+      modMinutes(date, minuteSpan)
+      noSeconds(date)
+      noMilliseconds(date)
+    }
   }
 }
 
@@ -191,10 +147,11 @@ class Month extends TimeSpan {
 
 module.exports = {
   Second,
-  Minute,
-  Minute15,
-  Minute30,
-  Minute60,
+  Minute: minuteFactory(1),
+  Minute5: minuteFactory(5),
+  Minute15: minuteFactory(15),
+  Minute30: minuteFactory(30),
+  Minute60: minuteFactory(60),
   Day,
   Week,
   Month
