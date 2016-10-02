@@ -163,7 +163,7 @@ class Week extends TimeSpan {
     noMilliseconds(date)
 
     const days = date.getDay()
-    return new Date(+ date - days * DAY)
+    date.setDate(date.getDate() - days)
   }
 }
 
