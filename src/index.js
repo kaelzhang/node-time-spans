@@ -26,6 +26,10 @@ class TimeSpan {
   }
 
   offset (amount) {
+    if (amount === 0) {
+      return this.time()
+    }
+
     return this._addSpan(amount)
   }
 

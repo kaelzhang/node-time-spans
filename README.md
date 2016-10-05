@@ -55,7 +55,7 @@ m15.offset(3)
 
 ## new {Constructor}(time)
 
-- **time** `String|Date|Number.<timestamp>` the initial value of the time.
+- **time** `(String|Date|Number.<timestamp>)=Date.now()` the initial value of the time.
 
 ### time()
 
