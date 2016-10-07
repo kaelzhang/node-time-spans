@@ -123,7 +123,7 @@ class Week extends TimeSpan {
     noMilliseconds(date)
 
     const days = date.getDay()
-    date.setDate(date.getDate() - days)
+    date.setDate(date.getDate() - days + TimeSpans.WEEK_ORIGIN)
   }
 }
 
@@ -149,7 +149,10 @@ class Month extends TimeSpan {
 }
 
 
-module.exports = {
+// Mark Friday as the key of a week
+const WEEK_ORIGIN = 5
+
+const TimeSpans = module.exports = {
   Second,
   Minute: minuteFactory(1),
   Minute5: minuteFactory(5),
@@ -158,5 +161,6 @@ module.exports = {
   Minute60: minuteFactory(60),
   Day,
   Week,
-  Month
+  Month,
+  WEEK_ORIGIN
 }
