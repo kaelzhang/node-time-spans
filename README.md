@@ -14,7 +14,7 @@
 
 # time-spans
 
-<!-- description -->
+A time span, is always point to the end point of a time period.
 
 ## Install
 
@@ -57,21 +57,30 @@ m15.offset(3)
 
 - **time** `(String|Date|Number.<timestamp>)=Date.now()` the initial value of the time.
 
-### time()
+### timestamp()
 
-returns `Date`, the real date.
+Returns `Number.<TimeStamp>`, the real date.
 
 ### next()
 
-returns `Date`, the next time span
+Returns
+
+- `Number.<TimeStamp>`, the next time span
+- `undefined` if the target time is in the future.
 
 ### prev()
 
-returns `Date`, the previous time span
+Returns
+
+- `Number.<TimeStamp>`, the previous time span
+- `undefined`
 
 ### offset(delta)
 
-returns `Date`, the `delta`-time time span relative
+Returns
+
+- `Number.<TimeStamp>`, the `delta`-time time span relative
+- `undefined`
 
 ## License
 

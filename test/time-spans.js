@@ -35,11 +35,12 @@ const CASES = {
     [
       // wed
       [2016, 9, 5, 1, 1],
-      [2016, 9, 2],
-      [2016, 8, 25],
-      [2016, 9, 9],
-      [-2, [2016, 8, 18]],
-      [2, [2016, 9, 16]]
+      [2016, 9, 7],
+      [2016, 8, 30],
+      [2016, 9, 14],
+      [-2, [2016, 8, 23]],
+      [2, [2016, 9, 21]],
+      true
     ]
   ],
 
@@ -133,21 +134,17 @@ Object.keys(CASES).forEach((type) => {
       : test
 
     _test(`${type}: ${JSON.stringify(c[0])}`, t => {
-      // console.log(
-      //   date.time().toString(),
-      //   new Date(...c[1]).toString()
-      // )
-      t.deepEqual(date.time(),     new Date(...c[1]), 'value')
-      t.deepEqual(date.prev(),     new Date(...c[2]), 'prev')
-      t.deepEqual(date.next(),     new Date(...c[3]), 'next')
-      t.deepEqual(
+      t.is(date.timestamp(),  + new Date(...c[1]), 'value')
+      t.is(date.prev(),       + new Date(...c[2]), 'prev')
+      t.is(date.next(),       + new Date(...c[3]), 'next')
+      t.is(
         date.offset(c[4][0]),
-        new Date(...c[4][1]),
+        + new Date(...c[4][1]),
         `offset: ${c[4][0]}`
       )
-      t.deepEqual(
+      t.is(
         date.offset(c[5][0]),
-        new Date(...c[5][1]),
+        + new Date(...c[5][1]),
         `offset: ${c[5][0]}`
       )
     })

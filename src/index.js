@@ -6,31 +6,33 @@ const MONTH = Symbol('month')
 
 
 class TimeSpan {
-  constructor (time, type) {
+  constructor (time, type, is_closest) {
     this._type = type
-    this._date = time
-      ? new Date(time)
-      : new Date()
+    this._date = new Date(time)
 
-    this._closest(this._date)
+    if (!is_closest) {
+      this._closest(this._date)
+    }
   }
 
   // Returns the beginning time of the current time span
-  time () {
-    return new Date(this._date)
+  timestamp () {
+    return + this._date
   }
 
   _addSpan (amount) {
-    const timestamp = + this._date + this._type * amount
-    return new Date(timestamp)
+    const result = + this._date + this._type * amount
+    if (result > + new Date) {
+      return
+    }
+
+    return result
   }
 
   offset (amount) {
-    if (amount === 0) {
-      return this.time()
-    }
-
-    return this._addSpan(amount)
+    return amount === 0
+      ? + this._date
+      : this._addSpan(amount)
   }
 
   // get the next time span
@@ -128,8 +130,6 @@ class Week extends TimeSpan {
 }
 
 
-const MONTHS_A_YEAR = 12
-
 class Month extends TimeSpan {
   constructor (time) {
     super(time, MONTH)
@@ -144,7 +144,7 @@ class Month extends TimeSpan {
   }
 
   _addSpan (amount) {
-    return new Date(this._date.getFullYear(), this._date.getMonth() + amount)
+    return + new Date(this._date.getFullYear(), this._date.getMonth() + amount)
   }
 }
 
