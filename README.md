@@ -40,7 +40,7 @@ const {
 // Gets the nearest 15-minute breakpoint
 const m15 = new Minute15(new Date(2016, 9, 1, 7, 50))
 
-// deepEqual to `new Date(2016, 9, 1, 7, 45)`
+// Equals to `+ new Date(2016, 9, 1, 7, 45)`
 m15.time()
 
 // 15 minutes after
