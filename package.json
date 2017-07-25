@@ -1,6 +1,6 @@
 {
   "name": "time-spans",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Time spans, especially for financial technology.",
   "main": "index.js",
   "scripts": {

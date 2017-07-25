@@ -51,6 +51,10 @@ m15.prev()
 
 // 15 * 3 minutes after
 m15.offset(3)
+
+// Test if the given time `2016-10-1 7:51`
+// is in the same period of m15
+m15.inPeriod('2016-10-1 7:51')
 ```
 
 ## new {Constructor}(time)
@@ -77,10 +81,18 @@ Returns
 
 ### offset(delta)
 
+- **delta** `Number`
+
 Returns
 
 - `Number.<TimeStamp>`, the `delta`-time time span relative
 - `undefined`
+
+### isPeriod(time)
+
+- **time** `Date|String.<Date>` Date object or stringified date string
+
+Returns `Boolean` whether the given time is in the same period of the original time. 
 
 ## License
 

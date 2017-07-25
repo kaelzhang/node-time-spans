@@ -6,13 +6,10 @@ const MONTH = Symbol('month')
 
 
 class TimeSpan {
-  constructor (time, type, is_closest) {
+  constructor (time, type) {
     this._type = type
     this._date = new Date(time)
-
-    if (!is_closest) {
-      this._closest(this._date)
-    }
+    this._closest(this._date)
   }
 
   // Returns the beginning time of the current time span
@@ -46,6 +43,10 @@ class TimeSpan {
 
   _closest () {
     throw new Error('_closest is not implemented.')
+  }
+
+  inPeriod (time) {
+    return + this._closest(new Date(time)) === + this._date
   }
 }
 
@@ -84,6 +85,7 @@ class Second extends TimeSpan {
 
   _closest (date) {
     noMilliseconds(date)
+    return date
   }
 }
 
@@ -98,6 +100,7 @@ function minuteFactory (minuteSpan) {
       modMinutes(date, minuteSpan)
       noSeconds(date)
       noMilliseconds(date)
+      return date
     }
   }
 }
@@ -113,6 +116,7 @@ class Day extends TimeSpan {
     noMinutes(date)
     noSeconds(date)
     noMilliseconds(date)
+    return date
   }
 }
 
@@ -130,6 +134,7 @@ class Week extends TimeSpan {
 
     const days = date.getDay()
     date.setDate(date.getDate() - days + TimeSpans.WEEK_ORIGIN)
+    return date
   }
 }
 
@@ -145,6 +150,7 @@ class Month extends TimeSpan {
     noMinutes(date)
     noSeconds(date)
     noMilliseconds(date)
+    return date
   }
 
   _addSpan (amount) {
@@ -166,6 +172,5 @@ const TimeSpans = module.exports = {
   Day,
   Week,
   Month,
-  TimeSpan,
   WEEK_ORIGIN
 }

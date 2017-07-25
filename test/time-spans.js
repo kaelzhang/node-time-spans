@@ -149,3 +149,14 @@ Object.keys(CASES).forEach((type) => {
     })
   })
 })
+
+
+test('inPeriod', t => {
+  const {
+    Day,
+    Month
+  } = TimeSpans
+
+  t.is(new Day('2017-01-29').inPeriod('2017-01-29 11:00'), true)
+  t.is(new Month('2017-01-29').inPeriod('2017-01-10'), true)
+})
