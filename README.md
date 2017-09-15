@@ -16,6 +16,8 @@
 
 A time span, is always point to the end point of a time period.
 
+A stock candlestick is a left-open right-closed interval, and its time is the close time or current time.
+
 ## Install
 
 ```sh
@@ -44,7 +46,7 @@ const m15 = new Minute15(new Date(2016, 9, 1, 7, 50))
 m15.time()
 
 // 15 minutes after
-m15.next()
+m15.next()      // `+ new Date(2016, 9, 1, 8)`
 
 // 15 minute before
 m15.prev()
@@ -54,7 +56,7 @@ m15.offset(3)
 
 // Test if the given time `2016-10-1 7:51`
 // is in the same period of m15
-m15.inPeriod('2016-10-1 7:51')
+m15.inPeriod('2016-10-1 7:51')   // returns `Boolean`
 ```
 
 ## new {Constructor}(time)
@@ -92,7 +94,7 @@ Returns
 
 - **time** `Date|String.<Date>` Date object or stringified date string
 
-Returns `Boolean` whether the given time is in the same period of the original time. 
+Returns `Boolean` whether the given time is in the same period of the original time.
 
 ## License
 
