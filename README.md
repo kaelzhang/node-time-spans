@@ -69,28 +69,19 @@ Returns `Number.<TimeStamp>`, the real date.
 
 ### next()
 
-Returns
-
-- `Number.<TimeStamp>`, the next time span
-- `undefined` if the target time is in the future.
+Returns `Number.<TimeStamp>` the next time span
 
 ### prev()
 
-Returns
-
-- `Number.<TimeStamp>`, the previous time span
-- `undefined`
+Returns `Number.<TimeStamp>`, the previous time span
 
 ### offset(delta)
 
 - **delta** `Number`
 
-Returns
+Returns `Number.<TimeStamp>`, the `delta`-time time span relative
 
-- `Number.<TimeStamp>`, the `delta`-time time span relative
-- `undefined`
-
-### isPeriod(time)
+### inSamePeriod(time)
 
 - **time** `Date|String.<Date>` Date object or stringified date string
 

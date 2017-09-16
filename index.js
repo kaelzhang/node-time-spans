@@ -19,9 +19,6 @@ class TimeSpan {
 
   _addSpan (amount) {
     const result = + this._date + this._type * amount
-    if (result > + new Date) {
-      return
-    }
 
     return result
   }
@@ -45,7 +42,7 @@ class TimeSpan {
     throw new Error('_closest is not implemented.')
   }
 
-  inPeriod (time) {
+  inSamePeriod (time) {
     return + this._closest(new Date(time)) === + this._date
   }
 }
