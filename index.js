@@ -8,7 +8,10 @@ const MONTH = Symbol('month')
 class TimeSpan {
   constructor (time, type) {
     this._type = type
-    this._date = new Date(time)
+    this._date = time
+      ? new Date(time)
+      : new Date()
+
     this._closest(this._date)
   }
 

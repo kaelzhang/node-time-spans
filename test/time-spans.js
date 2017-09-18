@@ -1,16 +1,6 @@
 const test = require('ava')
 const TimeSpans = require('..')
-// const {
-//   Second,
-//   Minute,
-//   Minute5
-//   Minute15,
-//   Minute30,
-//   Minute60,
-//   Day,
-//   Week,
-//   Month
-// }
+
 
 const CASES = {
   Month: [
@@ -151,7 +141,7 @@ Object.keys(CASES).forEach((type) => {
 })
 
 
-test('inPeriod', t => {
+test('inSamePeriod', t => {
   const {
     Day,
     Month
@@ -159,4 +149,14 @@ test('inPeriod', t => {
 
   t.is(new Day('2017-01-29').inSamePeriod('2017-01-29 11:00'), true)
   t.is(new Month('2017-01-29').inSamePeriod('2017-01-10'), true)
+})
+
+
+test('time.now()', async t => {
+
+  const {
+    Day
+  } = TimeSpans
+
+  t.is(new Day().timestamp(), new Day(new Date).timestamp())
 })
