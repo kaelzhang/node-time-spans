@@ -113,16 +113,24 @@ const CASES = {
 
 
 Object.keys(CASES).forEach((type) => {
-  const Constructor = TimeSpans[type]
   const cases = CASES[type]
+  const Constructor = TimeSpans[type]
+
+  run(type, cases, c => new Constructor(new Date(...c[0])), 'constructor')
+  run(type, cases, c => {
+    return TimeSpans(new Date(...c[0]), type.toUpperCase())
+  }, 'factory')
+})
+
+function run (type, cases, factory, prefix) {
   cases.forEach((c) => {
-    const date = new Constructor(new Date(...c[0]))
+    const date = factory(c)
 
     const _test = c[6]
       ? test.only
       : test
 
-    _test(`${type}: ${JSON.stringify(c[0])}`, t => {
+    _test(`${prefix}: ${type}: ${JSON.stringify(c[0])}`, t => {
       t.is(date.timestamp(),  + new Date(...c[1]), 'value')
       t.is(date.prev(),       + new Date(...c[2]), 'prev')
       t.is(date.next(),       + new Date(...c[3]), 'next')
@@ -138,7 +146,7 @@ Object.keys(CASES).forEach((type) => {
       )
     })
   })
-})
+}
 
 
 test('inSamePeriod', t => {

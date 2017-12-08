@@ -27,7 +27,7 @@ $ npm install time-spans --save
 ## Usage
 
 ```js
-const {
+import TimeSpan, {
   Second,
   Minute,
   Minute5,
@@ -37,10 +37,11 @@ const {
   Day,
   Week,
   Month
-} = require('time-spans')
+} from 'time-spans'
 
 // Gets the nearest 15-minute breakpoint
 const m15 = new Minute15(new Date(2016, 9, 1, 7, 50))
+const m15 = TimeSpan(new Date(2016, 9, 1, 7, 50), 'MINUTE15')
 
 // Equals to `+ new Date(2016, 9, 1, 7, 45)`
 m15.time()
@@ -59,8 +60,10 @@ m15.offset(3)
 m15.inPeriod('2016-10-1 7:51')   // returns `Boolean`
 ```
 
+## TimeSpan(time, span)
 ## new {Constructor}(time)
 
+- **span** `enum<DAY|WEEK|MONTH|...>`
 - **time** `(String|Date|Number.<timestamp>)=Date.now()` the initial value of the time.
 
 ### timestamp()

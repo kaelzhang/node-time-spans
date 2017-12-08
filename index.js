@@ -161,8 +161,32 @@ class Month extends TimeSpan {
 
 // Mark Friday as the key of a week
 const WEEK_ORIGIN = 5
+const ENUM_MAP = {
+  SECOND: 'Second',
+  MINUTE: 'Minute',
+  MINUTE5: 'Minute5',
+  MINUTE15: 'Minute15',
+  MINUTE30: 'Minute30',
+  MINUTE60: 'Minute60',
+  DAY: 'Day',
+  WEEK: 'Week',
+  MONTH: 'Month'
+}
 
-const TimeSpans = module.exports = {
+const TimeSpans = module.exports = (time, span) => {
+  const type = ENUM_MAP[span]
+  if (!type) {
+    const error = new RangeError(`invalid span "${span}"`)
+    error.name = 'InvalidSpanError'
+    error.code = 'INVALID_SPAN'
+    throw error
+  }
+
+  const Ctor = TimeSpans[type]
+  return new Ctor(time)
+}
+
+Object.assign(TimeSpans, {
   Second,
   Minute: minuteFactory(1),
   Minute5: minuteFactory(5),
@@ -172,5 +196,6 @@ const TimeSpans = module.exports = {
   Day,
   Week,
   Month,
-  WEEK_ORIGIN
-}
+  WEEK_ORIGIN,
+  ENUM_MAP
+})
